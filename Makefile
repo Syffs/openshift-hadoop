@@ -1,5 +1,5 @@
 # https://github.com/nlnwa/hadoop-openshift
-LOCAL_BASE_IMAGE=octest/hadoop
+LOCAL_BASE_IMAGE=test/hadoop
 
 REMOTE_BASE_IMAGE=192.168.1.5:5001/${LOCAL_BASE_IMAGE}
 
@@ -20,7 +20,3 @@ create: push template.yaml
 destroy: template.active
 	oc delete -f template.active
 	rm template.active
-
-cleanoc: 
-	ssh root@192.168.1.119 "docker rmi $(docker images | grep "octest/hadoop" | awk '{print $3}')"
-	ssh root@192.168.1.106 "docker rmi $(docker images | grep "octest/hadoop" | awk '{print $3}')"
